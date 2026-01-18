@@ -1,0 +1,51 @@
+on join:
+    set join message to ""
+    if player has permission "fristy.staff.joinmessage":
+        set {_prefix} to player's prefix
+
+        set {_final} to ""
+        set {_i} to 1
+        while {_i} <= length of {_prefix}:
+            if substring of {_prefix} from {_i} to ({_i}+1) = "&#":
+                # extract hex code
+                set {_hex} to substring of {_prefix} from ({_i}+2) to ({_i}+7)
+                # convert to Minecraft §x format
+                add "§x" to {_final}
+                add "§" + substring of {_hex} from 1 to 1 to {_final}
+                add "§" + substring of {_hex} from 2 to 2 to {_final}
+                add "§" + substring of {_hex} from 3 to 3 to {_final}
+                add "§" + substring of {_hex} from 4 to 4 to {_final}
+                add "§" + substring of {_hex} from 5 to 5 to {_final}
+                add "§" + substring of {_hex} from 6 to 6 to {_final}
+                add "" to {_final}
+                add 7 to {_i}
+            else:
+                add substring of {_prefix} from {_i} to {_i} to {_final}
+            add 1 to {_i}
+
+        broadcast "&7[&a&l+&7] %{_final}%%player%"
+
+on quit:
+    set quit message to ""
+    if player has permission "fristy.staff.joinmessage":
+        set {_prefix} to player's prefix
+
+        set {_final} to ""
+        set {_i} to 1
+        while {_i} <= length of {_prefix}:
+            if substring of {_prefix} from {_i} to ({_i}+1) = "&#":
+                set {_hex} to substring of {_prefix} from ({_i}+2) to ({_i}+7)
+                add "§x" to {_final}
+                add "§" + substring of {_hex} from 1 to 1 to {_final}
+                add "§" + substring of {_hex} from 2 to 2 to {_final}
+                add "§" + substring of {_hex} from 3 to 3 to {_final}
+                add "§" + substring of {_hex} from 4 to 4 to {_final}
+                add "§" + substring of {_hex} from 5 to 5 to {_final}
+                add "§" + substring of {_hex} from 6 to 6 to {_final}
+                add "" to {_final}
+                add 7 to {_i}
+            else:
+                add substring of {_prefix} from {_i} to {_i} to {_final}
+            add 1 to {_i}
+
+        broadcast "&7[&c&l-&7] %{_final}%%player%"
